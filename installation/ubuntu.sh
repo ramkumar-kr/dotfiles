@@ -1,11 +1,13 @@
 #!/bin/bash
 
+echo "Updating packages list..."
+sudo apt update
+
 # Install some basic packages
 echo "Do you want to Intsall the following packages
 - vim
 - git
 - tmux
-- ruby
 - gcc
 - npm 
 - wget
@@ -14,7 +16,19 @@ echo "Do you want to Intsall the following packages
 Enter Yes or No"
 select yn in "Yes" "No"; do
     case $yn in
-        Yes ) sudo apt-get install vim git tmux ruby gcc npm wget; break;;
+        Yes ) sudo apt-get install vim git tmux gcc npm wget; break;;
+        No ) break;;
+    esac
+done
+
+# Install ruby using RVM
+echo "Do you want to install and configure ruby using RVM? Enter Yes or No"
+select yn in "Yes" "No"; do
+    case $yn in
+        Yes )
+         sudo apt install curl && 
+         curl -sSL https://get.rvm.io | bash -s stable --ruby;
+         break;;
         No ) break;;
     esac
 done
@@ -25,9 +39,10 @@ select yn in "Yes" "No"; do
     case $yn in
         Yes )  
          read -p "Enter your Name : " GITNAME;
-         read -p "Enter your email address : " GITEMAIL;
+         read -p "Enter your email address : " EMAIL;
          git config --global user.name $NAME;
-         git config --global user.email $EMAIL;        
+         git config --global user.email $EMAIL;
+         git config --global core.editor vim;        
          break;;
         No ) break;;
     esac
