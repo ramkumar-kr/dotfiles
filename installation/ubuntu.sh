@@ -27,6 +27,7 @@ select yn in "Yes" "No"; do
     case $yn in
         Yes )
          sudo apt install curl && 
+         gpg2 --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 &&
          curl -sSL https://get.rvm.io | bash -s stable --ruby;
          break;;
         No ) break;;
@@ -58,7 +59,7 @@ else
     case $yn in
         Yes )
           read -p "Enter your email address : " SSHEMAIL;
-           ssh-keygen -t rsa -b 4096 -C $SSHEMAIL
+           ssh-keygen -t rsa -b 8192 -C $SSHEMAIL
           break;;
         No ) break;;
     esac
