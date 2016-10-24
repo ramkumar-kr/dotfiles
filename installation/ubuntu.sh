@@ -29,6 +29,7 @@ select yn in "Yes" "No"; do
          sudo apt install curl && 
          gpg2 --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 &&
          curl -sSL https://get.rvm.io | bash -s stable --ruby;
+         source /home/ramkumar/.rvm/scripts/rvm
          break;;
         No ) break;;
     esac
@@ -41,7 +42,7 @@ select yn in "Yes" "No"; do
         Yes )  
          read -p "Enter your Name : " GITNAME;
          read -p "Enter your email address : " EMAIL;
-         git config --global user.name $NAME;
+         git config --global user.name $GITNAME;
          git config --global user.email $EMAIL;
          git config --global core.editor vim;        
          break;;
@@ -95,8 +96,6 @@ echo "Do you want to install the Rails framework ( also known as Ruby on Rails )
 select yn in "Yes" "No"; do
     case $yn in
         Yes ) 
-           sudo apt-get install rubygem-railties;
-           echo "Wait!...There's still some more \n"
            gem install rails; break;;
         No ) break;;
     esac
@@ -117,10 +116,12 @@ done
 # Express
 echo "Do you want to install the following npm packages?
 - Express
+- React
+- webpack
 Enter Yes or No"
 select yn in "Yes" "No"; do
     case $yn in
-        Yes ) npm install express ; break;;
+        Yes ) npm install express react webpack; break;;
         No ) break;;
     esac
 done
